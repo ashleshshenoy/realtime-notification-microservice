@@ -3,40 +3,197 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Socket.IO Client</title>
+  <title>Realtime notification Client</title>
+  <style>
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  padding: 20px;
+  background-color: #f2f2f2;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.token-input {
+  margin-bottom: 20px;
+}
+
+.token-input label {
+  font-weight: bold;
+}
+
+.token-input input[type="text"] {
+  padding: 10px;
+  width: calc(100% - 80px);
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  margin-right: 10px;
+}
+
+.token-input button {
+  padding: 10px 20px;
+  font-size: 14px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+.token-input button:hover {
+  background-color: #0056b3;
+}
+
+.status-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.status-indicator {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.connected {
+  background-color: #4caf50;
+}
+
+.disconnected {
+  background-color: #9e9e9e;
+}
+
+.notifications {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+}
+
+.notification-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  background-color: #fff;
+  transition: background-color 0.3s;
+}
+
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+.notification-item:hover {
+  background-color: #f0f0f0;
+}
+
+  </style>
   <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
 </head>
 <body>
-  <h1>Socket.IO Client</h1>
+  <div class="container">
+    <h1>Socket.IO Client</h1>
 
-  <h2>steps to get output : <br> 1.get JWT token of user  <br>2.open the console <br> 3. send notitifcation to the user</h2>
+    <div class="token-input">
+      <label for="token">JWT Authorization Token:</label>
+      <br><br>
+      <input type="text" id="token" placeholder="Enter your JWT token...">
+      <br><br>
+      <button onclick="connectSocket()">Connect</button>
+      <button onclick="disconnectSocket()">Disconnect</button>
+    </div>
+
+    <div class="status-container">
+      <div id="status-indicator" class="status-indicator disconnected"></div>
+      <div class="status-text" id="status-text">Disconnected from Socket.IO server</div>
+    </div>
+
+    <h2>Notifications</h2>
+    <div class="notifications" id="notifications-container">
+    </div>
+  </div>
+
   <script>
-    const socket = io('http://localhost:8080', { 
-      withCredentials: true,
-      extraHeaders: {
-        //replace this with your own JWT token
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....'
+    let socket;
+
+    function connectSocket() {
+      const token = document.getElementById('token').value.trim();
+      if (!token) {
+        alert('Please enter a JWT token.');
+        return;
       }
-    });
 
+      socket = io('http://localhost:8080', { 
+        withCredentials: true,
+        extraHeaders: {
+          Authorization: `Bearer ${token}`
+        }
+      });
 
-    socket.on('connect', () => {
-      console.log('Connected to Socket.IO server');
-      socket.send('Hello from the client!');
-    });
+      socket.on('connect', () => {
+        console.log('Connected to Socket.IO server');
+        updateStatus('Connected to Socket.IO server', true);
+        socket.send('Hello from the client!');
+      });
 
-    socket.on('notification', data => {
-      console.log('Message from server:', data);
-    });
+      socket.on('notification', data => {
+        console.log('Message from server:', data);
+        displayNotification(data);
+      });
 
-    socket.on('disconnect', () => {
-      console.log('Disconnected from Socket.IO server');
-    });
+      socket.on('disconnect', () => {
+        console.log('Disconnected from Socket.IO server');
+        updateStatus('Disconnected from Socket.IO server', false);
+      });
 
-    socket.on('connect_error', error => {
-      console.log('Connection error:', error);
-    });
+      socket.on('connect_error', error => {
+        console.log('Connection error:', error);
+        updateStatus(`Connection error: ${error.message}`, false);
+      });
+    }
+
+    function disconnectSocket() {
+      if (socket) {
+        socket.disconnect();
+        socket = null;
+        updateStatus('Disconnected from Socket.IO server', false);
+      }
+    }
+
+    function updateStatus(statusText, connected) {
+      const statusIndicator = document.getElementById('status-indicator');
+      const statusTextElem = document.getElementById('status-text');
+
+      if (connected) {
+        statusIndicator.classList.remove('disconnected');
+        statusIndicator.classList.add('connected');
+      } else {
+        statusIndicator.classList.remove('connected');
+        statusIndicator.classList.add('disconnected');
+      }
+
+      statusTextElem.textContent = statusText;
+    }
+
+    function displayNotification(message) {
+      const notificationsContainer = document.getElementById('notifications-container');
+      const notificationItem = document.createElement('div');
+      notificationItem.classList.add('notification-item');
+      notificationItem.textContent = message;
+      notificationsContainer.insertBefore(notificationItem, notificationsContainer.firstChild);
+    }
   </script>
 </body>
 </html>
-

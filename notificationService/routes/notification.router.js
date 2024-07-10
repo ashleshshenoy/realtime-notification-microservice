@@ -15,6 +15,7 @@ router.post("/notifications", authorize, isAdmin, async (req, res) => {
 		if(!userId || !message) res.status(400).json({ error : "Invalid request, required fields are missing"});
 		const notification = new Notification({ id: uuidv4(), userId: userId, message });
 		await notification.save();
+		console.log(req.user);
 		await publishMessage(req.user.id, userId, message);  // message is pushed into the queue 
 		res.status(201).json(notification);
 	} catch (error) {

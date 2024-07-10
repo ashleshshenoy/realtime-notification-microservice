@@ -18,6 +18,10 @@ services:
 
   rabbitmq:
     image: "rabbitmq:3-management"
+    ports:
+      - "5672:5672"    # RabbitMQ messaging port
+      - "15672:15672"  # RabbitMQ management UI port
+
 
     networks:
       - internal

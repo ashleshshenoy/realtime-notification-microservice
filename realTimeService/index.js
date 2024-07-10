@@ -6,19 +6,10 @@ const server = http.createServer(app);
 const { Server } = require('socket.io');
 const { connectRabbitMQ, consumeMessages } = require('./utils/rabbitmq')
 const { authorize } = require("./middlewares/auth.middleware")
-const setupSwagger = require("./utils/swaggerConfig");
 const path = require('path');
 
-const io = new Server(server, {
-  cors: {
-    origin: 'http://127.0.0.1:3003',
-    methods: ['GET', 'POST'],
-    allowedHeaders: ['Authorization'],
-    credentials: true,
-  }
-});
+const io = new Server(server);
 
-setupSwagger(app);
 
 app.get('/', (req,res)=>{
   res.sendFile(path.join(__dirname,"client.html"));
