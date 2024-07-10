@@ -8,11 +8,14 @@
 </head>
 <body>
   <h1>Socket.IO Client</h1>
+
+  <h2>steps to get output : <br> 1.get JWT token of user  <br>2.open the console <br> 3. send notitifcation to the user</h2>
   <script>
     const socket = io('http://localhost:8080', { 
       withCredentials: true,
       extraHeaders: {
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFmZjgxMWJkLWQ3MWMtNGQ3Zi1hZmJhLWY5NGMxMWE2MDA0MCIsImVtYWlsIjoiYXNobGVzaHNoZW5veTA5QGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzIwMzA3MDU0fQ.S5fV6PieRC8QUbiaqBRzDgHIoqUGORjPGE_hIkxKoM4'
+        //replace this with your own JWT token
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9....'
       }
     });
 
@@ -37,7 +40,3 @@
 </body>
 </html>
 
-<!-- 
-extraHeaders: {
-  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFmZjgxMWJkLWQ3MWMtNGQ3Zi1hZmJhLWY5NGMxMWE2MDA0MCIsImVtYWlsIjoiYXNobGVzaHNoZW5veTA5QGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzIwMzA3MDU0fQ.S5fV6PieRC8QUbiaqBRzDgHIoqUGORjPGE_hIkxKoM4'
-} -->

@@ -11,7 +11,7 @@ tags:
     description: Authentication related endpoints
 
 paths:
-  /auth/register:
+  /api/register:
     post:
       summary: Register a new user
       tags: [Auth]
@@ -62,7 +62,7 @@ paths:
                   error:
                     type: string
 
-  /auth/login:
+  /api/login:
     post:
       summary: Login a user
       tags: [Auth]

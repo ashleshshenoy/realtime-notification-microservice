@@ -12,12 +12,10 @@ tags:
     description: Notification related endpoints
 
 paths:
-  /notifications:
+  /api/notifications:
     post:
       summary: Create a new notification
       tags: [Notifications]
-      security:
-        - bearerAuth: []
       requestBody:
         required: true
         content:
@@ -57,12 +55,19 @@ paths:
                 properties:
                   error:
                     type: string
+        401:
+          description: Access token is missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
 
     get:
       summary: Get notifications for the authenticated user
       tags: [Notifications]
-      security:
-        - bearerAuth: []
       parameters:
         - name: page
           in: query
@@ -101,13 +106,20 @@ paths:
                 properties:
                   error:
                     type: string
+        401:
+          description: Access token is missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
 
-  /notifications/{id}:
+  /api/notifications/{id}:
     get:
       summary: Get a specific notification detail by ID
       tags: [Notifications]
-      security:
-        - bearerAuth: []
       parameters:
         - name: id
           in: path
@@ -138,6 +150,15 @@ paths:
                 properties:
                   error:
                     type: string
+        401:
+          description: Access token is missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
         404:
           description: Notification not found
           content:
@@ -151,8 +172,6 @@ paths:
     put:
       summary: Mark a notification as read
       tags: [Notifications]
-      security:
-        - bearerAuth: []
       parameters:
         - name: id
           in: path
@@ -185,6 +204,15 @@ paths:
                 properties:
                   error:
                     type: string
+        401:
+          description: Access token is missing or invalid
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
         404:
           description: Notification not found
           content:
@@ -201,3 +229,17 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
+
+  responses:
+    UnauthorizedError:
+      description: Access token is missing or invalid
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              error:
+                type: string
+
+security:
+  - bearerAuth: []
