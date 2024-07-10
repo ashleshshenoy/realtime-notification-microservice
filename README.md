@@ -16,6 +16,7 @@ A microservices-based real-time notification system built with Node.js, Express,
 
 ## Overview
 This project implements a scalable real-time notification system using microservices architecture. It integrates Node.js for backend services, MongoDB for data storage, RabbitMQ for message queuing, and Socket.IO for real-time communication.
+
 ![notificationHLD drawio](https://github.com/ashleshshenoy/realtime-notification-microservice/assets/73695378/f0c881f3-089d-43df-8118-d20758188504)
  
 
@@ -81,5 +82,32 @@ This project implements a scalable real-time notification system using microserv
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/your-username/real-time-notification-system.git
+2. **Move into the directory:**
+   ```bash
    cd real-time-notification-system
-   docker compose up --build 
+3. **Make sure the docker is up:**
+   ```bash
+   docker compose up --build
+
+##Api Documentation
+Comprehensive API documentation is available using Swagger:
+
+- Access the documentation at `http://localhost:8080/auth/docs` for auth service & `http://localhost:8080/notifications/docs` for notification service
+
+## Contributing
+
+Contributions are welcome! Follow these steps to contribute:
+
+1. **Fork the repository.**
+2. **Create a new branch (`git checkout -b feature/new-feature`).**
+3. **Make your changes.**
+4. **Commit your changes (`git commit -am 'Add new feature'`).**
+5. **Push to the branch (`git push origin feature/new-feature`).**
+6. **Create a new Pull Request.**
+
+Please follow the [Contributor Covenant](https://www.contributor-covenant.org/) code of conduct.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
