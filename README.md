@@ -32,6 +32,9 @@ This project implements a scalable real-time notification system using microserv
 
 
 
+
+
+
 ## Technologies Used
 - Node.js
 - Express.js
@@ -41,6 +44,9 @@ This project implements a scalable real-time notification system using microserv
 - JSON Web Tokens (JWT)
 - Swagger (OpenAPI)
 - Docker
+
+
+
 
 
 
@@ -59,6 +65,9 @@ This project implements a scalable real-time notification system using microserv
 - `WS://localhost:8080/`:
 - WebSocket connection for real-time notifications.
 - Listen for notifications from the queue and broadcast them to connected users.
+
+
+
 
 
 
@@ -84,6 +93,9 @@ This project implements a scalable real-time notification system using microserv
     - Nginx is used as a single point of entry point to make all the API calls.
 
 
+
+
+
     
 ## Setup and Installation
 1. **Clone the repository:**
@@ -98,20 +110,29 @@ This project implements a scalable real-time notification system using microserv
 
 
 
-##Api Documentation
+
+
+
+## Api Documentation
 
 Comprehensive API documentation is available using Swagger:
 - Access the documentation at `http://localhost:8080/auth/docs` for auth service & `http://localhost:8080/notifications/docs` for notification service
 
 
 
-##working-snapshots
 
-![Screenshot from 2024-07-11 02-20-06](https://github.com/ashleshshenoy/realtime-notification-microservice/assets/73695378/0cca781f-52ca-43ad-8255-6cf95f21d1b7)
+
+
+## Working Snapshots
+
 ![Screenshot from 2024-07-11 02-16-32](https://github.com/ashleshshenoy/realtime-notification-microservice/assets/73695378/2f627274-0e9e-41a5-a00c-d432eb6415d7)
+![Screenshot from 2024-07-11 02-20-06](https://github.com/ashleshshenoy/realtime-notification-microservice/assets/73695378/0cca781f-52ca-43ad-8255-6cf95f21d1b7)
 ![Screenshot from 2024-07-11 02-21-30](https://github.com/ashleshshenoy/realtime-notification-microservice/assets/73695378/b2cc12c5-0858-4694-8731-4b1bcdda785e)
 ![Screenshot from 2024-07-11 04-32-32](https://github.com/ashleshshenoy/realtime-notification-microservice/assets/73695378/1434d9d2-abd7-4d6a-a04f-c62bfbdae833)
 ![Screenshot from 2024-07-11 02-20-32](https://github.com/ashleshshenoy/realtime-notification-microservice/assets/73695378/92b6b213-22b8-4fd7-bdca-5bc178843a92)
+
+
+
 
 ## Contributing
 
@@ -123,6 +144,9 @@ Contributions are welcome! Follow these steps to contribute:
 5. **Push to the branch (`git push origin feature/new-feature`).**
 6. **Create a new Pull Request.**
 Please follow the [Contributor Covenant](https://www.contributor-covenant.org/) code of conduct.
+
+
+
 
 
 ## License
