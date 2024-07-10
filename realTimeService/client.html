@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket.IO Client</title>
+  <script src="https://cdn.socket.io/4.0.0/socket.io.min.js"></script>
+</head>
+<body>
+  <h1>Socket.IO Client</h1>
+  <script>
+    const socket = io('http://localhost:8080', { 
+      withCredentials: true,
+      extraHeaders: {
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFmZjgxMWJkLWQ3MWMtNGQ3Zi1hZmJhLWY5NGMxMWE2MDA0MCIsImVtYWlsIjoiYXNobGVzaHNoZW5veTA5QGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzIwMzA3MDU0fQ.S5fV6PieRC8QUbiaqBRzDgHIoqUGORjPGE_hIkxKoM4'
+      }
+    });
+
+
+    socket.on('connect', () => {
+      console.log('Connected to Socket.IO server');
+      socket.send('Hello from the client!');
+    });
+
+    socket.on('notification', data => {
+      console.log('Message from server:', data);
+    });
+
+    socket.on('disconnect', () => {
+      console.log('Disconnected from Socket.IO server');
+    });
+
+    socket.on('connect_error', error => {
+      console.log('Connection error:', error);
+    });
+  </script>
+</body>
+</html>
+
+<!-- 
+extraHeaders: {
+  Authorization: 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFmZjgxMWJkLWQ3MWMtNGQ3Zi1hZmJhLWY5NGMxMWE2MDA0MCIsImVtYWlsIjoiYXNobGVzaHNoZW5veTA5QGdtYWlsLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNzIwMzA3MDU0fQ.S5fV6PieRC8QUbiaqBRzDgHIoqUGORjPGE_hIkxKoM4'
+} -->

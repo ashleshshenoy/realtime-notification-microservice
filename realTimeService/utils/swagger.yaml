@@ -1,0 +1,34 @@
+openapi: 3.0.0
+info:
+  title: WebSocket API Documentation
+  version: 1.0.0
+servers:
+  - url: ws://localhost:3002
+    description: Development server
+paths:
+  /ws/socket:
+    get:
+      summary: WebSocket Connection
+      description: Establishes a WebSocket connection.
+      parameters:
+        - in: header
+          name: Authorization
+          required: true
+          schema:
+            type: string
+            example: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+      responses:
+        '101':
+          description: Switching Protocols
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Connected to WebSocket server
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
