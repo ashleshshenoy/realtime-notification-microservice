@@ -101,16 +101,15 @@ This project implements a scalable real-time notification system using microserv
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/your-username/real-time-notification-system.git
+   ```
 2. **Move into the directory:**
    ```bash
    cd real-time-notification-system
+   ```
 3. **Make sure the docker is up:**
    ```bash
    docker compose up --build
-
-
-
-
+   ```
 
 
 ## Api Documentation
